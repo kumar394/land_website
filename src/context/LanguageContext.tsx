@@ -5,7 +5,7 @@ type Lang = "en" | "hi";
 
 const translations = {
   en: {
-    appName: "Bihar Bhumi",
+    appName: "BhumiAlert",
     tagline: "Check Land Mutation Status Instantly",
     heroTitle: "Your Land Records,\nAt Your Fingertips",
     heroSub: "Track mutation status, Khata & Plot details from the Bihar government portal — free, fast, and mobile-friendly.",
@@ -55,8 +55,8 @@ const translations = {
     rejected: "Rejected",
   },
   hi: {
-    appName: "बिहार भूमि",
-    tagline: "भूमि म्यूटेशन स्थिति तुरंत जांचें",
+    appName: "BhumiAlert",
+    tagline: "भूमि अलर्ट — म्यूटेशन स्थिति तुरंत जांचें",
     heroTitle: "आपकी ज़मीन की जानकारी,\nआपकी उंगलियों पर",
     heroSub: "बिहार सरकार पोर्टल से म्यूटेशन स्थिति, खाता और प्लॉट विवरण जांचें — बिल्कुल मुफ्त, तेज़ और मोबाइल-फ्रेंडली।",
     checkNow: "अभी स्थिति जांचें",
