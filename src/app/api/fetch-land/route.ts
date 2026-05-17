@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
       {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
-          "User-Agent": "Mozilla/5.0 (compatible; BiharBhumi/1.0)",
+          "User-Agent": "Mozilla/5.0 (compatible; BhumiAlert/1.0)",
           Referer: baseUrl,
         },
         timeout: 15000,
