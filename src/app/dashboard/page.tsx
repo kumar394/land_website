@@ -38,14 +38,18 @@ function RecordCard({ record, t }: { record: LandRecord; t: ReturnType<typeof us
           <p className="text-xs text-gray-400 mb-1">{t.plotNumber}</p>
           <p className="font-semibold text-gray-800">{record.plotNo}</p>
         </div>
-        <div className="bg-gray-50 rounded-xl p-3">
-          <p className="text-xs text-gray-400 mb-1">{t.landArea}</p>
-          <p className="font-semibold text-gray-800">{record.landArea}</p>
-        </div>
-        <div className="bg-gray-50 rounded-xl p-3">
-          <p className="text-xs text-gray-400 mb-1">{t.landType}</p>
-          <p className="font-semibold text-gray-800">{record.landType}</p>
-        </div>
+        {record.date && record.date !== "-" && (
+          <div className="bg-gray-50 rounded-xl p-3">
+            <p className="text-xs text-gray-400 mb-1">Date / तारीख</p>
+            <p className="font-semibold text-gray-800">{record.date}</p>
+          </div>
+        )}
+        {record.landArea && record.landArea !== "-" && (
+          <div className="bg-gray-50 rounded-xl p-3">
+            <p className="text-xs text-gray-400 mb-1">{t.landArea}</p>
+            <p className="font-semibold text-gray-800">{record.landArea}</p>
+          </div>
+        )}
       </div>
 
       <div className="bg-gray-50 rounded-xl p-3 text-sm">
@@ -60,7 +64,8 @@ function DashboardContent() {
   const { t } = useLang();
   const searchParams = useSearchParams();
   const district = searchParams.get("district") || "";
-  const khataNo = searchParams.get("khataNo") || "";
+  const year = searchParams.get("year") || "2026";
+  const caseNo = searchParams.get("caseNo") || "";
   const plotNo = searchParams.get("plotNo") || "";
 
   const [records, setRecords] = useState<LandRecord[]>([]);
@@ -70,7 +75,7 @@ function DashboardContent() {
   const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
-    const params = new URLSearchParams({ district, khataNo, plotNo });
+    const params = new URLSearchParams({ district, year, caseNo, plotNo });
     fetch(`/api/fetch-land?${params}`)
       .then((r) => r.json())
       .then((data) => {
@@ -81,7 +86,7 @@ function DashboardContent() {
       })
       .catch(() => setErrorMsg(t.error))
       .finally(() => setLoading(false));
-  }, [district, khataNo, plotNo, t.error]);
+  }, [district, year, caseNo, plotNo, t.error]);
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
@@ -93,7 +98,8 @@ function DashboardContent() {
         <h1 className="text-2xl font-bold text-gray-800">{t.results}</h1>
         <div className="flex flex-wrap gap-2 mt-2 text-xs text-gray-500">
           <span className="bg-gray-100 px-3 py-1 rounded-full">📍 {district}</span>
-          {khataNo && <span className="bg-gray-100 px-3 py-1 rounded-full">Khata: {khataNo}</span>}
+          <span className="bg-gray-100 px-3 py-1 rounded-full">📅 {year}-{String(parseInt(year)+1)}</span>
+          {caseNo && <span className="bg-gray-100 px-3 py-1 rounded-full">Case: {caseNo}</span>}
           {plotNo && <span className="bg-gray-100 px-3 py-1 rounded-full">Plot: {plotNo}</span>}
         </div>
       </div>
